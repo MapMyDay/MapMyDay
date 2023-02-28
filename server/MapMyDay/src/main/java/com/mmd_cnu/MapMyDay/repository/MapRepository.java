@@ -1,6 +1,6 @@
 package com.mmd_cnu.MapMyDay.repository;
 
-import com.cnu.findMe.model.MapData;
+import com.mmd_cnu.MapMyDay.model.MapData;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

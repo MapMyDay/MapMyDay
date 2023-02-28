@@ -1,7 +1,7 @@
 package com.mmd_cnu.MapMyDay.repository;
 
-import com.cnu.findMe.model.MapData;
-import com.cnu.findMe.model.MapStatus;
+import com.mmd_cnu.MapMyDay.model.MapData;
+import com.mmd_cnu.MapMyDay.model.MapStatus;
 import com.wix.mysql.EmbeddedMysql;
 import com.wix.mysql.ScriptResolver;
 import com.wix.mysql.config.Charset;
