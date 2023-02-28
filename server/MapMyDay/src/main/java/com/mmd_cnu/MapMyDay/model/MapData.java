@@ -7,25 +7,20 @@ public class MapData {
         private final UUID mapId;
         private final UUID userId;
     private MapStatus mapStatus;
-    private List<location> locations;
 
-    public MapData(UUID mapId, UUID userId, List<location> locations) {
+    private List<location> locations;
+    private List<Route> routes;
+
+    public MapData(UUID mapId, UUID userId) {
         this.mapId = mapId;
         this.userId = userId;
         this.mapStatus = MapStatus.INCOMPLETE;
-        this.locations = locations;
     }
 
     public MapData(UUID mapId, UUID userId, MapStatus mapStatus) {
         this.mapId = mapId;
         this.userId = userId;
         this.mapStatus = mapStatus;
-    }
-
-    public MapData(UUID mapId, UUID userId) {
-        this.mapId = mapId;
-        this.userId = userId;
-        this.mapStatus = MapStatus.INCOMPLETE;
     }
 
     public void setMapStatus(MapStatus mapStatus) {
@@ -42,6 +37,14 @@ public class MapData {
 
     public void setLocations(List<location> locations) {
         this.locations = locations;
+    }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 
     public UUID getMapId() {
