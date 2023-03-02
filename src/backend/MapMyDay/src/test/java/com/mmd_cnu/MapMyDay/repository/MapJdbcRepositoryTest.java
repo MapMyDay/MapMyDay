@@ -90,7 +90,7 @@ class MapJdbcRepositoryTest {
     @DisplayName("map delete")
     void testDelete() {
         mapRepository.delete(newMap);
-        assertThat(mapRepository.findAll(), is(true));
+        assertThat(mapRepository.findAll().isEmpty(), is(true));
     }
 
     @Test
