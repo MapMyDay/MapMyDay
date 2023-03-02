@@ -36,7 +36,13 @@ public class MapJdbcRepository implements MapRepository{
 
     @Override
     public MapData update(MapData map) {
-        return null;
+        String sql = "UPDATE maps SET map_status = :mapStatus " +
+                     "WHERE map_id = UNHEX(REPLACE(:mapId,'-',''))";
+        var update = jdbcTemplate.update(sql, toParamMap(map));
+        if (update != 1) {
+            throw new RuntimeException("Nothing was updated");
+        }
+        return map;
     }
 
     @Override
@@ -72,7 +78,7 @@ public class MapJdbcRepository implements MapRepository{
     private Map<String, Object> toParamMap(MapData map) {
         var paramMap = new HashMap<String, Object>();
         paramMap.put("mapId", map.getMapId().toString().getBytes());
-        paramMap.put("userId", map.getMapId().toString().getBytes());
+        paramMap.put("userId", map.getUserId().toString().getBytes());
         paramMap.put("mapStatus", map.getMapStatus().toString());
         return paramMap;
     }

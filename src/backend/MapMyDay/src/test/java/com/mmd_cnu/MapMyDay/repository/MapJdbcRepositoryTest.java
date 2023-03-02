@@ -57,8 +57,8 @@ class MapJdbcRepositoryTest {
     @DisplayName("관광 코스 전체 정보를 담은 map Data를 추가할 수 있다.")
     void testInsert() {
         mapRepository.insert(newMap);
-
         var all = mapRepository.findAll();
+        System.out.println();
         assertThat(all.isEmpty(), is(false));
     }
 
@@ -76,5 +76,14 @@ class MapJdbcRepositoryTest {
     void testFindByUserId() {
         var map = mapRepository.findByUserId(newMap.getUserId());
         assertThat(map.isEmpty(), is(false));
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("map의 state를 update 할 수 있다.")
+    void testSetMapStatus() {
+        newMap.setMapStatus(MapStatus.COMPLETE);
+        mapRepository.update(newMap);
+        assertThat(mapRepository.findByMapId(newMap.getMapId()).get().getMapStatus(), is(MapStatus.COMPLETE));
     }
 }
