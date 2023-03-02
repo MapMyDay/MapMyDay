@@ -3,10 +3,12 @@ package com.mmd_cnu.MapMyDay.service;
 import com.mmd_cnu.MapMyDay.model.MapData;
 import com.mmd_cnu.MapMyDay.model.MapStatus;
 import com.mmd_cnu.MapMyDay.repository.MapRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class DefaultMapService implements MapService{
     private final MapRepository mapRepository;
 
