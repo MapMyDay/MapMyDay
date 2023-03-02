@@ -4,7 +4,6 @@ import com.mmd_cnu.MapMyDay.model.MapData;
 import com.mmd_cnu.MapMyDay.model.MapStatus;
 import com.wix.mysql.EmbeddedMysql;
 import com.wix.mysql.ScriptResolver;
-import com.wix.mysql.config.Charset;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +16,6 @@ import static com.wix.mysql.EmbeddedMysql.anEmbeddedMysql;
 import static com.wix.mysql.config.Charset.UTF8;
 import static com.wix.mysql.config.MysqldConfig.aMysqldConfig;
 import static com.wix.mysql.distribution.Version.v5_6_36;
-import static com.wix.mysql.distribution.Version.v5_7_latest;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -80,10 +78,28 @@ class MapJdbcRepositoryTest {
 
     @Test
     @Order(4)
-    @DisplayName("map의 state를 update 할 수 있다.")
+    @DisplayName("map update")
     void testSetMapStatus() {
         newMap.setMapStatus(MapStatus.COMPLETE);
         mapRepository.update(newMap);
         assertThat(mapRepository.findByMapId(newMap.getMapId()).get().getMapStatus(), is(MapStatus.COMPLETE));
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("map delete")
+    void testDelete() {
+        mapRepository.delete(newMap);
+        assertThat(mapRepository.findAll(), is(true));
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("map deleteAll")
+    void testDeleteAll() {
+        mapRepository.insert(newMap);
+        mapRepository.deleteAll();
+        var all = mapRepository.findAll();
+        assertThat(all.isEmpty(), is(true));
     }
 }

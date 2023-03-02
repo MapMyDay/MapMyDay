@@ -46,6 +46,20 @@ public class MapJdbcRepository implements MapRepository{
     }
 
     @Override
+    public void delete(MapData map) {
+        String sql = "DELETE maps WHERE map_id = UNHEX(REPLACE(:mapId,'-',''))";
+        var update = jdbcTemplate.update(sql, toParamMap(map));
+        if (update != 1) {
+            throw new RuntimeException("Nothing was updated");
+        }
+    }
+
+    @Override
+    public void deleteAll() {
+        jdbcTemplate.update("DELETE FROM maps", Collections.emptyMap());
+    }
+
+    @Override
     public List<MapData> findByUserId(UUID userId) {
         return jdbcTemplate.query("SELECT * FROM maps WHERE user_id = UNHEX(REPLACE(:userId,'-',''))",
                 Collections.singletonMap("userId", userId.toString().getBytes()),
