@@ -9,9 +9,7 @@ public class location {
     private final double latitude;
     private final double longitude;
 
-    private int priority;
-
-    public location(UUID locationId, String locationName, double latitude, double longitude, int priority) {
+    public location(UUID locationId, String locationName, double latitude, double longitude) {
 
         Assert.notNull(locationName, "locationName should not be null");
         Assert.notNull(latitude, "latitude should not be null");
@@ -21,14 +19,13 @@ public class location {
         this.locationName = locationName;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.priority = priority;
     }
 
-    public int getPriority() {
-        return priority;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
+    public double getLongitude() {
+        return longitude;
     }
 }
