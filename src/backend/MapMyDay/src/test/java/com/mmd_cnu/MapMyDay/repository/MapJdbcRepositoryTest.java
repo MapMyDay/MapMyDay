@@ -16,6 +16,7 @@ import static com.wix.mysql.EmbeddedMysql.anEmbeddedMysql;
 import static com.wix.mysql.config.Charset.UTF8;
 import static com.wix.mysql.config.MysqldConfig.aMysqldConfig;
 import static com.wix.mysql.distribution.Version.v5_6_36;
+import static com.wix.mysql.distribution.Version.v5_7_10;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -28,7 +29,7 @@ class MapJdbcRepositoryTest {
 
     @BeforeAll
     static void setup() {
-        var config = aMysqldConfig(v5_6_36)
+        var config = aMysqldConfig(v5_7_10)
                 .withCharset(UTF8)
                 .withPort(2215)
                 .withUser("test", "test1234!")
@@ -48,7 +49,7 @@ class MapJdbcRepositoryTest {
     @Autowired
     MapRepository mapRepository;
 
-    private static final MapData newMap = new MapData(UUID.randomUUID(), UUID.randomUUID(), MapStatus.INCOMPLETE);
+    private static final MapData newMap = new MapData(UUID.randomUUID(), UUID.randomUUID());
 
     @Test
     @Order(1)

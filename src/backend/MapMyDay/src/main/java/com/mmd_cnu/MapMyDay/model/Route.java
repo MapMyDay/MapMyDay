@@ -6,6 +6,10 @@ public class Route {
     private location from;
     private location to;
 
+    private int busCount;
+    private int subwayBusCount;
+
+
     public Route(UUID routeId, List<location> locations, location from, location to) {
         this.routeId = routeId;
         this.from = from;

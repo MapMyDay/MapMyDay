@@ -12,6 +12,6 @@ public interface MapService {
     List<MapData> getMapsByUserId(UUID userId);
     List<MapData> getAllMaps();
     MapData createMap();
-    MapData createMap(MapStatus mapStatus);
-
+    MapData createMap(UUID user_id);
+    MapData updateMap(MapData updatedMap);
 }

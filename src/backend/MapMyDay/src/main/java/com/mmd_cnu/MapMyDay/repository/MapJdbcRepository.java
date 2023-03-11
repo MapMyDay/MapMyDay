@@ -25,7 +25,7 @@ public class MapJdbcRepository implements MapRepository{
 
     @Override
     public MapData insert(MapData map) {
-        var update = jdbcTemplate.update("INSERT INTO maps(map_id, user_id, map_status)" + " VALUES (UNHEX(REPLACE(:mapId,'-','')), UNHEX(REPLACE(:userId,'-','')), :mapStatus)", toParamMap(map));
+        var update = jdbcTemplate.update("INSERT INTO maps(map_id, user_id, map_status, location_id_list, route_id_list)" + " VALUES (UNHEX(REPLACE(:mapId,'-','')), UNHEX(REPLACE(:userId,'-','')), :mapStatus, NULL, NULL)", toParamMap(map));
 
         if(update != 1) {
             throw new RuntimeException("Noting was inserted");

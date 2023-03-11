@@ -1,14 +1,20 @@
 package com.mmd_cnu.MapMyDay.api;
 import com.mmd_cnu.MapMyDay.model.location;
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class ODsayApi {
     String apiKey;
 
@@ -18,7 +24,8 @@ public class ODsayApi {
         apiKey = "4zVzlDJLvu3atqAt+eZOeEGXHYifZ9AUVo7A+/Ck0/s";
     }
 
-    public String findingWay(location from, location to) throws IOException {
+    //두 location 사이의 대중교통 길찾기 경로를 map 형태로 반환한다
+    public Map<String, Object> findingWay(location from, location to) throws IOException, JSONException {
         String SX = "SX=" + from.getLatitude();
         String SY = "SY=" + from.getLongitude();
         String EX = "EX=" + to.getLatitude();
@@ -51,7 +58,16 @@ public class ODsayApi {
         bufferedReader.close();
         conn.disconnect();
 
-        // 결과 출력
-        return sb.toString();
+        // 결과 리턴
+        String jsonString = sb.toString();
+        JSONObject jsonObject = new JSONObject(jsonString);
+        Map<String, Object> map = new HashMap<>();
+        Iterator<String> iterator = jsonObject.keys();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            Object value = jsonObject.get(key);
+            map.put(key, value);
+        }
+        return map;
     }
 }

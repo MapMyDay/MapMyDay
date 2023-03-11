@@ -33,8 +33,14 @@ public class DefaultMapService implements MapService{
     }
 
     @Override
-    public MapData createMap(MapStatus mapStatus) {
-        var map = new MapData(UUID.randomUUID(), UUID.randomUUID(), mapStatus);
+    public MapData createMap(UUID user_id) {
+        var map = new MapData(UUID.randomUUID(), user_id, MapStatus.INCOMPLETE);
         return mapRepository.insert(map);
     }
+
+    @Override
+    public MapData updateMap(MapData updatedMap) {
+        return mapRepository.update(updatedMap);
+    }
+
 }
