@@ -6,6 +6,7 @@ import com.mmd_cnu.MapMyDay.repository.MapRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,15 +28,17 @@ public class DefaultMapService implements MapService{
     }
 
     @Override
-    public MapData createMap() {
-        var map = new MapData(UUID.randomUUID(), UUID.randomUUID());
+    public MapData createMap(UUID user_id) {
+        var map = new MapData(UUID.randomUUID(), user_id);
         return mapRepository.insert(map);
     }
 
     @Override
-    public MapData createMap(UUID user_id) {
-        var map = new MapData(UUID.randomUUID(), user_id, MapStatus.INCOMPLETE);
-        return mapRepository.insert(map);
+    public void deleteMap(UUID map_id) {
+        Optional<MapData> map = mapRepository.findByMapId(map_id);
+        if(!map.isEmpty()) {
+            mapRepository.delete(map.get());
+        }
     }
 
     @Override

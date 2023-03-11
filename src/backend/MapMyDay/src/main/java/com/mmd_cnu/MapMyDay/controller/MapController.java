@@ -35,4 +35,10 @@ public class MapController {
     public void createMap(@RequestParam UUID user_id) {
         mapService.createMap(user_id);
     }
+
+    @RequestMapping(value="/deleteMap", method= RequestMethod.GET, params="map_id")
+    public void deleteMap(@RequestParam UUID map_id) {
+        mapService.deleteMap(map_id);
+    }
+
 }
