@@ -5,13 +5,12 @@ CREATE TABLE maps
     map_status VARCHAR(10) NOT NULL,
     location_id_list JSON,
     route_id_list JSON
-)
+);
 
 CREATE TABLE locations
 (
     location_id BINARY(16) PRIMARY KEY,
     user_id BINARY(16) NOT NULL,
-    latitude UINT(),
-    longitude UINT()
-)
-)
+    latitude DOUBLE,
+    longitude DOUBLE
+);

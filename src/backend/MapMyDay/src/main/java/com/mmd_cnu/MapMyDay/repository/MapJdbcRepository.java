@@ -1,5 +1,6 @@
 package com.mmd_cnu.MapMyDay.repository;
 
+import com.mmd_cnu.MapMyDay.model.Location;
 import com.mmd_cnu.MapMyDay.model.MapData;
 import com.mmd_cnu.MapMyDay.model.MapStatus;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -64,6 +65,12 @@ public class MapJdbcRepository implements MapRepository{
         return jdbcTemplate.query("SELECT * FROM maps WHERE user_id = UNHEX(REPLACE(:userId,'-',''))",
                 Collections.singletonMap("userId", userId.toString().getBytes()),
                 mapRowMapper);
+    }
+
+    @Override
+    public MapData insertLocation(MapData map, Location location) {
+        map.getLocations().add(location);
+        return map;
     }
 
     @Override

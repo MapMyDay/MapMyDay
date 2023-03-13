@@ -103,4 +103,14 @@ class MapJdbcRepositoryTest {
         var all = mapRepository.findAll();
         assertThat(all.isEmpty(), is(true));
     }
+
+    @Test
+    @Order(7)
+    @DisplayName("insert location")
+    void testDeleteAll() {
+        mapRepository.insert(newMap);
+        mapRepository.deleteAll();
+        var all = mapRepository.findAll();
+        assertThat(all.isEmpty(), is(true));
+    }
 }

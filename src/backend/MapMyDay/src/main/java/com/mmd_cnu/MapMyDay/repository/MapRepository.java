@@ -1,5 +1,6 @@
 package com.mmd_cnu.MapMyDay.repository;
 
+import com.mmd_cnu.MapMyDay.model.Location;
 import com.mmd_cnu.MapMyDay.model.MapData;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,5 @@ public interface MapRepository {
     void deleteAll();
     public Optional<MapData> findByMapId(UUID mapId);
     public List<MapData> findByUserId(UUID userId);
+    MapData insertLocation(MapData map, Location location);
 }
