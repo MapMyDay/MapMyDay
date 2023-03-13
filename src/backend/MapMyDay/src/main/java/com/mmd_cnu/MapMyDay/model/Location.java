@@ -3,13 +3,13 @@ import org.springframework.util.Assert;
 
 import java.util.UUID;
 
-public class location {
+public class Location {
     private final UUID locationId;
     private final String locationName;
     private final double latitude;
     private final double longitude;
 
-    public location(UUID locationId, String locationName, double latitude, double longitude) {
+    public Location(UUID locationId, String locationName, double latitude, double longitude) {
 
         Assert.notNull(locationName, "locationName should not be null");
         Assert.notNull(latitude, "latitude should not be null");

@@ -1,5 +1,5 @@
 package com.mmd_cnu.MapMyDay.api;
-import com.mmd_cnu.MapMyDay.model.location;
+import com.mmd_cnu.MapMyDay.model.Location;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class ODsayApi {
     }
 
     //두 location 사이의 대중교통 길찾기 경로를 map 형태로 반환한다
-    public Map<String, Object> findingWay(location from, location to) throws IOException, JSONException {
+    public Map<String, Object> findingWay(Location from, Location to) throws IOException, JSONException {
         String SX = "SX=" + from.getLatitude();
         String SY = "SY=" + from.getLongitude();
         String EX = "EX=" + to.getLatitude();

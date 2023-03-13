@@ -1,7 +1,5 @@
 package com.mmd_cnu.MapMyDay.model;
 
-import org.springframework.context.annotation.Bean;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -10,7 +8,7 @@ public class MapData {
         private final UUID userId;
     private MapStatus mapStatus;
 
-    private List<location> locations;
+    private List<Location> locations;
     private List<Route> routes;
 
     public MapData(UUID mapId, UUID userId) {
@@ -33,11 +31,11 @@ public class MapData {
         return mapStatus;
     }
 
-    public List<location> getLocations() {
+    public List<Location> getLocations() {
         return locations;
     }
 
-    public void setLocations(List<location> locations) {
+    public void setLocations(List<Location> locations) {
         this.locations = locations;
     }
 

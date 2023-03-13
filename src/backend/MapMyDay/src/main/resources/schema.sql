@@ -6,3 +6,12 @@ CREATE TABLE maps
     location_id_list JSON,
     route_id_list JSON
 )
+
+CREATE TABLE locations
+(
+    location_id BINARY(16) PRIMARY KEY,
+    user_id BINARY(16) NOT NULL,
+    latitude UINT(),
+    longitude UINT()
+)
+)

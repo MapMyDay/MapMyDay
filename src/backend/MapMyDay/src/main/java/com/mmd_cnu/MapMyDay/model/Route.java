@@ -3,14 +3,14 @@ import java.util.List;
 import java.util.UUID;
 public class Route {
     private final UUID routeId;
-    private location from;
-    private location to;
+    private Location from;
+    private Location to;
 
     private int busCount;
     private int subwayBusCount;
 
 
-    public Route(UUID routeId, List<location> locations, location from, location to) {
+    public Route(UUID routeId, List<Location> locations, Location from, Location to) {
         this.routeId = routeId;
         this.from = from;
         this.to = to;
