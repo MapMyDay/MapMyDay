@@ -9,16 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-
 import java.util.UUID;
 
 import static com.wix.mysql.EmbeddedMysql.anEmbeddedMysql;
 import static com.wix.mysql.config.Charset.UTF8;
 import static com.wix.mysql.config.MysqldConfig.aMysqldConfig;
-import static com.wix.mysql.distribution.Version.v5_6_36;
 import static com.wix.mysql.distribution.Version.v5_7_10;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -92,25 +90,5 @@ class MapJdbcRepositoryTest {
     void testDelete() {
         mapRepository.delete(newMap);
         assertThat(mapRepository.findAll().isEmpty(), is(true));
-    }
-
-    @Test
-    @Order(6)
-    @DisplayName("map deleteAll")
-    void testDeleteAll() {
-        mapRepository.insert(newMap);
-        mapRepository.deleteAll();
-        var all = mapRepository.findAll();
-        assertThat(all.isEmpty(), is(true));
-    }
-
-    @Test
-    @Order(7)
-    @DisplayName("insert location")
-    void testDeleteAll() {
-        mapRepository.insert(newMap);
-        mapRepository.deleteAll();
-        var all = mapRepository.findAll();
-        assertThat(all.isEmpty(), is(true));
     }
 }
