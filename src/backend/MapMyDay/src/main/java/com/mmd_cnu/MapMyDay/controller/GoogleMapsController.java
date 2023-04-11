@@ -38,4 +38,10 @@ public class GoogleMapsController {
     public List<LatLng> getLatLngList(@RequestParam String address) throws Exception {
         return googleMapsService.getLatLngList(address);
     }
+    
+    // 검색한 장소의 이름과 경도위도 정보를 List 객체로 반환
+    @RequestMapping("/location")
+    public List<String[]> searchPlaces(String placeName, String placeType, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude) throws Exception {
+        return googleMapsService.searchPlaces(placeName, placeType, latitude, longitude);
+    }
 }
