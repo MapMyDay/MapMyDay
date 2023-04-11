@@ -97,4 +97,33 @@ public class GoogleMapsService {
         }
         return latLngList;
     }
+    
+    // 입력 값 : 장소이름, 장소유형, 현재 위도, 현재 경도
+    public List<String[]> searchPlaces(String placeName, String placeType, double latitude, double longitude) throws Exception {
+
+        GeoApiContext context = new GeoApiContext.Builder()
+                .apiKey(apiKey)
+                .build();
+
+        LatLng location = new LatLng(latitude, longitude);
+
+        PlacesSearchResponse response = PlacesApi.textSearchQuery(context, placeName)
+                .location(location)
+                .radius(10000) // 반경 10km 내에서 검색
+                .type(PlaceType.valueOf(placeType)) // 장소 유형 검색
+                .rankby(RankBy.DISTANCE) // 거리순으로 정렬
+                .await();
+
+        List<String[]> resultList = new ArrayList<>();
+
+        for (PlacesSearchResult result : response.results) {
+            String[] placeInfo = new String[2];
+            // 이름과 장소 위치만 반환
+            placeInfo[0] = result.name;
+            placeInfo[1] = result.formattedAddress;
+            resultList.add(placeInfo);
+        }
+
+        return resultList;
+    }
 }
