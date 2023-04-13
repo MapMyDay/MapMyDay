@@ -22,7 +22,7 @@ public class GoogleMapsController {
     @Autowired
     private GoogleMapsService googleMapsService;
 
-
+    //localhost:8080/swagger-ui/index.html#/ 사용해서 확인하기
     //sample URL = http://localhost:8080/API/directions?origin=Seoul&destination=Busan&mode=TRANSIT
     //서울 -> 부산으로 향하는 경로 표시
     @GetMapping("/directions")
@@ -34,15 +34,15 @@ public class GoogleMapsController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    // sample URL = http://localhost:8080/API/directionList?origin=Seoul&destination=Busan&mode=TRANSIT
-    // 서울 -> 부산으로 향하는 대중교통 경로 리스트 표시
+    // sample URL = http://localhost:8080/API/directionList?origin=%EB%A7%88%EC%9D%8C%EB%A1%9C49&destination=%EB%8C%80%ED%95%99%EB%A1%9C76%EB%B2%88%EC%95%88%EA%B8%B836&mode=TRANSIT
+    // 세종 가락마을2단지 -> 대전 충남대 근방으로 향하는 대중교통 경로 리스트 표시
     @GetMapping("/directionList")
     public ResponseEntity<Map<String, Object>> directionList(@RequestParam String origin, @RequestParam String destination, @RequestParam(required = false) String mode) throws Exception {
-        List<String> result = googleMapsService.directionList(origin, destination, mode);
+        Map<String, List<String>> result = googleMapsService.directionList(origin, destination, mode);
         Map<String, Object> response = new HashMap<>();
         response.put("status", "OK");
         response.put("routes", result);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return ResponseEntity.ok().body(response);
     }
 
     //sample URL = http://localhost:8080/API/place?address=Seoul
